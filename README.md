@@ -1,1 +1,383 @@
 # KenLi_the_ME
+import React from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, ExternalLink, Award, Hammer, Cpu, Wrench, BookOpen, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+// =============================
+// Quick config — edit this data
+// =============================
+const PROFILE = {
+  name: "Zhengzhao Li",
+  title: "Robotics & Mechanical Engineering",
+  tagline:
+    "Hands-on builder with a robotics foundation, industry experience at Bosch & Yanjan, and strong CAD/mechatronics skills.",
+  location: "Seattle, WA",
+  email: "your.email@domain.com",
+  github: "https://github.com/your-handle",
+  linkedin: "https://www.linkedin.com/in/your-handle/",
+  resumeUrl: "#", // replace with your PDF link
+};
+
+const HIGHLIGHTS = [
+  {
+    icon: <Hammer className="h-5 w-5" />,
+    title: "Robotics to Industry",
+    desc: "VEX robotics roots → university mechatronics → motorsport & manufacturing internships.",
+  },
+  {
+    icon: <Cpu className="h-5 w-5" />,
+    title: "Mechatronics Integration",
+    desc: "CAD assemblies, mechanism design, Arduino/ESP32 control, and rapid prototyping.",
+  },
+  {
+    icon: <Wrench className="h-5 w-5" />,
+    title: "Problem‑Solving Under Constraints",
+    desc: "Iterative design, jam‑prevention, reliability, and practical manufacturability.",
+  },
+];
+
+const TIMELINE = [
+  {
+    year: "Junior → High School",
+    role: "Robotics Team Lead (VEX)",
+    org: "VEX Robotics",
+    bullets: [
+      "Built competitive robots (4‑bar, intakes, drivetrains), led mechanical subteam",
+      "Learned motion optimization, CAD for mechanisms, fast iteration"
+    ],
+  },
+  {
+    year: "University of Washington",
+    role: "Mechanical Engineering (BS)",
+    org: "UW",
+    bullets: [
+      "ME 480/493 studio projects: servo candy dispenser, hot‑end modeling, system packaging",
+      "TA for ME 123 — taught engineering fundamentals and CAD basics"
+    ],
+  },
+  {
+    year: "Yanjan",
+    role: "Manufacturing / Maintenance Engineering Intern",
+    org: "Yanjan",
+    bullets: [
+      "Preventive maintenance on production lines: pumps, air cylinders, airflow tuning",
+      "Troubleshot pneumatics, improved uptime and safety; supported QC checks"
+    ],
+  },
+  {
+    year: "Bosch",
+    role: "Motorsport / Engineering Intern",
+    org: "Bosch (Motorsport)",
+    bullets: [
+      "Assisted component diagnostics and data‑informed decisions under tight tolerances",
+      "Collaborated on performance testing and documentation with engineering teams"
+    ],
+  },
+];
+
+const PROJECTS = [
+  {
+    title: "Servo Candy Dispenser",
+    subtitle: "ESP32 web control • jam‑resistant throat • modular magazine",
+    bullets: [
+      "Designed servo‑driven gate and throat geometry to reduce jams",
+      "Built web UI for angle/step control and telemetry using AsyncWebServer",
+      "Iterated with 3D‑printed prototypes; simplified mounting to hook on suitcase"
+    ],
+    links: [
+      { href: "#", label: "Demo (placeholder)" },
+    ],
+    image: null,
+  },
+  {
+    title: "Prusa‑Style Hot‑End CAD",
+    subtitle: "Heat sink • heat break • heat block • fan • nozzle",
+    bullets: [
+      "Modeled assembly with correct orientation and clear wire routing constraints",
+      "Explored packaging in limited volume; focused on mechanism accuracy",
+      "Produced exploded views and motion study for documentation",
+    ],
+    links: [
+      { href: "#", label: "CAD Gallery (placeholder)" },
+    ],
+    image: null,
+  },
+  {
+    title: "4‑Bar Crank‑Rocker Analysis (CGA)",
+    subtitle: "Kinematics • coupler curve • interactive widgets",
+    bullets: [
+      "Implemented geometry in Python (conformal GA); verified Grashof cases",
+      "Added sliders for link lengths and live visualization",
+      "Connected design insights back to mechanism selection in robots",
+    ],
+    links: [
+      { href: "#", label: "Notebook (placeholder)" },
+    ],
+    image: null,
+  },
+];
+
+const SKILLS = [
+  {
+    group: "CAD & Design",
+    items: ["SolidWorks", "Fusion 360", "Technical drawings", "Motion studies"],
+  },
+  {
+    group: "Programming",
+    items: ["Arduino C++", "ESP32 (AsyncWebServer)", "MATLAB", "Python"],
+  },
+  {
+    group: "Fabrication",
+    items: ["FDM 3D printing", "Laser cutting", "Basic machining", "Assembly & wiring"],
+  },
+  {
+    group: "Analysis",
+    items: ["Kinematics", "System Dynamics", "Heat/Fluids (coursework)", "Tolerance basics"],
+  },
+  {
+    group: "Professional",
+    items: ["Troubleshooting", "Documentation", "Team leadership (TA)", "Safety & QC"],
+  },
+];
+
+const AWARDS = [
+  {
+    title: "Scholarship Recipient",
+    org: "(University)",
+    note: "Merit‑based award recognizing academic excellence and contribution.",
+  },
+  {
+    title: "TA — ME 123",
+    org: "UW",
+    note: "Supported first‑year engineering; reinforced fundamentals & CAD for 100+ students.",
+  },
+];
+
+// Utility: smooth scroll for anchor links
+function useSmoothScroll() {
+  useEffect(() => {
+    const handler = (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute('href');
+      if (id && id !== '#') {
+        e.preventDefault();
+        document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
+}
+
+// Badge component
+const Badge = ({ children }) => (
+  <span className="rounded-full border px-3 py-1 text-xs leading-none">
+    {children}
+  </span>
+);
+
+export default function PortfolioSite() {
+  useSmoothScroll();
+  const [year, setYear] = useState(new Date().getFullYear());
+  return (
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Nav */}
+      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          <div className="font-semibold">{PROFILE.name}</div>
+          <nav className="hidden md:flex gap-6 text-sm">
+            <a href="#about" className="hover:opacity-70">About</a>
+            <a href="#timeline" className="hover:opacity-70">Journey</a>
+            <a href="#projects" className="hover:opacity-70">Projects</a>
+            <a href="#skills" className="hover:opacity-70">Skills</a>
+            <a href="#awards" className="hover:opacity-70">Awards</a>
+            <a href="#contact" className="hover:opacity-70">Contact</a>
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button asChild className="rounded-2xl">
+              <a href={PROFILE.resumeUrl} target="_blank" rel="noreferrer">
+                View Résumé
+              </a>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section id="about" className="mx-auto max-w-6xl px-4 pt-12 pb-16">
+        <div className="grid md:grid-cols-5 gap-8 items-center">
+          <div className="md:col-span-3">
+            <motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="text-3xl sm:text-4xl font-bold tracking-tight">
+              {PROFILE.title}
+            </motion.h1>
+            <p className="mt-3 text-lg text-gray-700 max-w-2xl">{PROFILE.tagline}</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {HIGHLIGHTS.map((h, i) => (
+                <Card key={i} className="rounded-2xl shadow-sm">
+                  <CardContent className="p-4 flex items-start gap-3">
+                    {h.icon}
+                    <div>
+                      <div className="font-medium">{h.title}</div>
+                      <div className="text-sm text-gray-600">{h.desc}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="mt-6 flex gap-3">
+              <Button asChild variant="outline" className="rounded-2xl">
+                <a href="#projects">See Projects</a>
+              </Button>
+              <Button asChild className="rounded-2xl">
+                <a href="#contact">Get in Touch</a>
+              </Button>
+            </div>
+          </div>
+          <div className="md:col-span-2">
+            <Card className="rounded-3xl shadow-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><BookOpen className="h-5 w-5"/> Profile</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm text-gray-700">
+                <div><strong>Location:</strong> {PROFILE.location}</div>
+                <div className="flex items-center gap-2"><Badge>Robotics</Badge><Badge>Mechatronics</Badge><Badge>CAD</Badge></div>
+                <p>
+                  I build, test, and iterate. My journey started in junior‑high robotics and grew into university mechatronics projects and industry internships. I love turning design intent into reliable mechanisms and clean documentation.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Journey / Timeline */}
+      <section id="timeline" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-2xl font-semibold mb-6">Journey</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          {TIMELINE.map((t, i) => (
+            <Card key={i} className="rounded-2xl shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center justify-between">
+                  <span>{t.role} — <span className="text-gray-600">{t.org}</span></span>
+                  <span className="text-sm text-gray-500">{t.year}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-gray-700">
+                <ul className="list-disc pl-5 space-y-1">
+                  {t.bullets.map((b, j) => (
+                    <li key={j}>{b}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {PROJECTS.map((p, i) => (
+            <Card key={i} className="rounded-2xl shadow-sm flex flex-col">
+              <CardHeader>
+                <CardTitle className="text-lg">{p.title}</CardTitle>
+                <div className="text-sm text-gray-600">{p.subtitle}</div>
+              </CardHeader>
+              <CardContent className="flex-1 text-sm text-gray-700">
+                <ul className="list-disc pl-5 space-y-1">
+                  {p.bullets.map((b, j) => (
+                    <li key={j}>{b}</li>
+                  ))}
+                </ul>
+                {p.links?.length ? (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {p.links.map((l, k) => (
+                      <a key={k} href={l.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm underline">
+                        {l.label} <ExternalLink className="h-3 w-3"/>
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-2xl font-semibold mb-6">Skills</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {SKILLS.map((s, i) => (
+            <Card key={i} className="rounded-2xl shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg">{s.group}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {s.items.map((it, j) => (
+                  <Badge key={j}>{it}</Badge>
+                ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Awards */}
+      <section id="awards" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-2xl font-semibold mb-6">Awards & Teaching</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          {AWARDS.map((a, i) => (
+            <Card key={i} className="rounded-2xl shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2"><Award className="h-5 w-5"/>{a.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-gray-700">
+                <div className="text-gray-600">{a.org}</div>
+                <p className="mt-1">{a.note}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA / Contact */}
+      <section id="contact" className="mx-auto max-w-6xl px-4 py-14">
+        <div className="rounded-3xl border p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h3 className="text-xl font-semibold">Let’s build something.</h3>
+            <p className="text-gray-700 max-w-xl mt-2">
+              I’m applying for graduate studies and engineering internships where I can keep building mechanisms, integrating controls, and shipping robust designs.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3 text-sm">
+              <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2 underline"><Mail className="h-4 w-4"/> {PROFILE.email}</a>
+              <a href={PROFILE.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 underline"><Github className="h-4 w-4"/> GitHub</a>
+              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 underline"><Linkedin className="h-4 w-4"/> LinkedIn</a>
+            </div>
+          </div>
+          <div className="shrink-0">
+            <Button asChild size="lg" className="rounded-2xl">
+              <a href="#projects" className="inline-flex items-center">See my projects <ChevronRight className="ml-1 h-5 w-5"/></a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t">
+        <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-gray-600 flex items-center justify-between">
+          <div>© {year} {PROFILE.name}. All rights reserved.</div>
+          <div className="flex gap-4">
+            <a href="#about" className="hover:opacity-70">Top</a>
+            <a href={PROFILE.resumeUrl} className="hover:opacity-70" target="_blank" rel="noreferrer">Résumé</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
