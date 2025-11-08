@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zhengzhao (Ken) Li – Portfolio</title>
+  <title>Zhengzhao (Ken) Li – Mechanical Engineering Portfolio</title>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
-      background: #fafafa;
+      background: #f9f9fb;
       color: #222;
       line-height: 1.6;
     }
     header {
-      background: #4b0082;
+      background: linear-gradient(135deg, #4b0082, #6a0dad);
       color: #fff;
-      padding: 1.2rem 2rem;
+      padding: 2rem 2rem;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    header h1 { margin: 0.2rem 0; font-size: 1.8rem; }
+    header h1 { margin: 0.3rem 0; font-size: 2rem; }
     header p { margin: 0.2rem 0; opacity: 0.9; }
+
     nav {
       background: #eee;
       display: flex;
@@ -28,36 +33,73 @@
       gap: 1.5rem;
       padding: 0.7rem;
       flex-wrap: wrap;
+      position: sticky;
+      top: 4.4rem;
+      z-index: 9;
+      border-bottom: 1px solid #ddd;
     }
     nav a {
       color: #4b0082;
       text-decoration: none;
       font-weight: 600;
+      position: relative;
+      transition: color 0.3s;
     }
-    nav a:hover { text-decoration: underline; }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #4b0082;
+      transition: width 0.3s;
+    }
+    nav a:hover { color: #6a0dad; }
+    nav a:hover::after { width: 100%; }
 
     section {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 3rem auto;
       background: #fff;
       padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
     }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     h2 { color: #4b0082; margin-top: 0; }
+    h3 { margin-bottom: 0.5rem; color: #333; }
     ul { margin-left: 1.5rem; }
+
     .project {
       border-left: 4px solid #4b0082;
       padding-left: 1rem;
       margin-bottom: 1.5rem;
+      background: #fafafa;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
     footer {
       text-align: center;
-      padding: 1.2rem;
+      padding: 1.5rem;
       background: #4b0082;
       color: white;
       margin-top: 2rem;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
     }
+
     a.btn {
       display: inline-block;
       background: #4b0082;
@@ -66,8 +108,10 @@
       border-radius: 6px;
       text-decoration: none;
       margin-top: 0.8rem;
+      transition: background 0.3s, transform 0.2s;
     }
-    a.btn:hover { background: #5f1da5; }
+    a.btn:hover { background: #6a0dad; transform: translateY(-2px); }
+
     @media(max-width:600px){
       section{margin:1rem; padding:1.2rem;}
     }
@@ -76,34 +120,66 @@
 <body>
   <header>
     <h1>Zhengzhao (Ken) Li</h1>
-    <p>Robotics & Mechanical Engineering | University of Washington</p>
-    <p>Seattle, WA • <a href="mailto:your.email@domain.com" style="color:white;">your.email@domain.com</a></p>
+    <p>B.S. in Mechanical Engineering — University of Washington</p>
+    <p>Seattle, WA • <a href="mailto:zzli0403@uw.edu" style="color:white;">zzli0403@uw.edu</a></p>
   </header>
 
   <nav>
     <a href="#about">About</a>
-    <a href="#journey">Journey</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#awards">Awards</a>
+    <a href="#journey">Engineering Journey</a>
+    <a href="#projects">Featured Projects</a>
+    <a href="#skills">Technical Skills</a>
+    <a href="#awards">Awards & Experience</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <section id="about">
     <h2>About Me</h2>
     <p>
-      I'm a hands-on mechanical engineer with a robotics foundation and a passion for building practical, reliable systems.
-      My journey began with VEX Robotics in junior high and evolved into real engineering experiences through internships at Bosch and Yanjan,
-      focusing on mechanical systems, manufacturing, and mechatronic integration.
+      Ever since childhood, I’ve been fascinated by the sound of engines and the art of mechanical design.
+      Growing up as a petrolhead, I would sketch cars and imagine how every gear and piston worked together to create motion.
+      That passion evolved into something bigger when I founded my junior high’s first-ever robotics club and led our team to compete in VEX Robotics competitions,
+      where we built and refined robots through countless design iterations and late-night test runs.
+    </p>
+    <p>
+      Today, that same drive continues to shape my path in Mechanical Engineering at the University of Washington.
+      As a Teaching Assistant for <strong>ME 123: Introduction to Visualization and CAD</strong>, I guide students through design fundamentals
+      and help them build the same excitement I once felt when I first opened SolidWorks.
+      Whether it’s designing precision assemblies, debugging a stubborn mechanism, or mentoring others,
+      I find satisfaction in turning mechanical ideas into reliable, elegant solutions.
     </p>
   </section>
 
   <section id="journey">
     <h2>Engineering Journey</h2>
+    <h3>VEX Robotics (2018–2022)</h3>
     <ul>
-      <li><strong>VEX Robotics (Junior–High School):</strong> Built competitive robots, led mechanical subteams, learned iterative design and teamwork.</li>
-      <li><strong>University of Washington:</strong> ME student, completed projects like servo-controlled candy dispenser and hot-end assembly packaging. TA for ME123, teaching CAD and fundamentals.</li>
-      <li><strong>Yanjan Internship:</strong> Performed preventive maintenance—changing pumps, adjusting air flows, troubleshooting pneumatics, improving uptime.</li>
-      <li><strong>Bosch Motorsport Internship:</strong> Assisted in component diagnostics, data-driven testing, and cross-functional engineering collaboration.</li>
+      <li>Co-Founder & Team Leader, <strong>Invincible Planck VEX Team</strong></li>
+      <li>Led mechanical design, prototyping, and competition preparation for international contests</li>
+      <li>Awards: 2021 Asia-Pacific Second-Class Honor, 2021 Design Award, 2020 China Final Second-Class Honor</li>
+      <li>Vice President of the <strong>Invincible Planck Robotics Club</strong>, managing recruitment and workshops</li>
+    </ul>
+
+    <h3>University of Washington (2022–Present)</h3>
+    <ul>
+      <li>B.S. in Mechanical Engineering (GPA 3.56)</li>
+      <li>Teaching Assistant for ME 123, supporting lab sessions and grading for 60+ students</li>
+      <li>Recipient of the <strong>James B. Morrison Endowed Scholarship in Mechanical Engineering</strong></li>
+      <li>Coursework: Statics, Dynamics, Design, Manufacturing, Mechatronics</li>
+    </ul>
+
+    <h3>Bosch XC-CT EHW Technician Internship (Jul–Aug 2023)</h3>
+    <ul>
+      <li>Assisted in PCB rework and debugging through testing, soldering, and wiring</li>
+      <li>Translated technical documentation and supported cross-functional communication</li>
+      <li>Gained insight into quality control and precision component diagnostics</li>
+    </ul>
+
+    <h3>Yanjan USA LLC Engineer Internship (Jun–Sep 2025)</h3>
+    <ul>
+      <li>Performed preventive maintenance on automated production lines, resolving issues with air lines, pumps, and motors</li>
+      <li>Created an Excel-based troubleshooting guidebook for station-wise issue tracking</li>
+      <li>Collaborated with maintenance and QC teams to improve reliability and standardize documentation</li>
     </ul>
   </section>
 
@@ -111,30 +187,27 @@
     <h2>Featured Projects</h2>
 
     <div class="project">
-      <h3>Servo Candy Dispenser</h3>
-      <p>ESP32 web-controlled servo system with jam-resistant throat and modular magazine.</p>
+      <h3>Candy Dispenser Mechanism (Ongoing)</h3>
       <ul>
-        <li>Designed servo-driven gate with optimized geometry.</li>
-        <li>Built web interface for control using AsyncWebServer.</li>
-        <li>Iterated with 3D-printed prototypes for reliability.</li>
+        <li>Designing a mechanical candy dispenser featuring a non-servo actuation system for simplicity and reliability</li>
+        <li>Exploring optimized gate geometry and modular magazine packaging for easy assembly and refill</li>
       </ul>
     </div>
 
     <div class="project">
       <h3>Prusa Hot-End CAD Assembly</h3>
-      <p>Modeled heat sink, heat break, heat block, fan, and nozzle with correct alignment and wiring layout.</p>
       <ul>
-        <li>Developed accurate 3D assembly using Fusion 360.</li>
-        <li>Documented motion constraints and packaging space.</li>
+        <li>Modeled and assembled the heat sink, heat break, heat block, fan, and nozzle in SolidWorks with correct orientation and wiring space</li>
+        <li>Focused on geometric accuracy, motion constraints, and manufacturability for classroom demonstration</li>
       </ul>
     </div>
 
     <div class="project">
-      <h3>4-Bar Crank-Rocker Analysis</h3>
-      <p>Used Python and conformal geometric algebra to simulate link motion and coupler curves.</p>
+      <h3>F1 Car Assembly (ME 123 Final Project)</h3>
       <ul>
-        <li>Created visualization with adjustable link lengths.</li>
-        <li>Explored mechanical principles for robotic mechanisms.</li>
+        <li>Built a detailed F1 car SolidWorks assembly from reference components</li>
+        <li>Demonstrated advanced part mating, exploded views, and rendering techniques</li>
+        <li>Showcased precision and design intent through motion analysis and section views</li>
       </ul>
     </div>
   </section>
@@ -142,30 +215,51 @@
   <section id="skills">
     <h2>Technical Skills</h2>
     <ul>
-      <li><strong>CAD & Design:</strong> SolidWorks, Fusion 360, motion studies, tolerance design</li>
-      <li><strong>Programming:</strong> Arduino C++, MATLAB, Python, ESP32 web control</li>
-      <li><strong>Fabrication:</strong> 3D printing, machining, laser cutting, mechanical assembly</li>
-      <li><strong>Analysis:</strong> Kinematics, dynamics, heat transfer</li>
-      <li><strong>Professional:</strong> Troubleshooting, documentation, leadership (TA)</li>
+      <li><strong>CAD & Fabrication:</strong> SolidWorks (CSWA Certified), Fusion 360, 3D Printing, Manufacturing, Laser Cutting, Machining</li>
+      <li><strong>Programming:</strong> C/C++, Arduino, MATLAB, Python</li>
+      <li><strong>Analysis & Design:</strong> Statics, Dynamics, System Modeling, Tolerance Analysis, Heat Transfer (coursework)</li>
+      <li><strong>Tools:</strong> Microsoft Excel, Multimeter, Soldering, Testing Equipment</li>
+      <li><strong>Soft Skills:</strong> Troubleshooting, Technical Communication, Team Leadership, Teaching Assistance</li>
+      <li><strong>Languages:</strong> English (Fluent), Mandarin (Native), French (Beginner)</li>
     </ul>
   </section>
 
   <section id="awards">
-    <h2>Awards & Teaching</h2>
+    <h2>Awards & Additional Experience</h2>
     <ul>
-      <li><strong>University Scholarship:</strong> Merit-based award recognizing academic excellence and contribution.</li>
-      <li><strong>Teaching Assistant (ME123):</strong> Supported 100+ students in CAD fundamentals and mechanical design principles.</li>
+      <li><strong>James B. Morrison Endowed Scholarship in Mechanical Engineering</strong> — University of Washington</li>
+      <li><strong>SolidWorks CSWA Certification</strong> — Mechanical Design Specialist</li>
+      <li><strong>VEX Robotics Awards:</strong> 2021 Asia-Pacific Second-Class Honor, 2021 Design Award, 2020 China Final Second-Class Honor</li>
+      <li><strong>Barista, Starbucks (UW Campus):</strong> Managed quality and efficiency in a fast-paced, team-based environment</li>
+      <li><strong>Teaching Assistant, ME 123 (UW):</strong> Supported 60+ students in CAD and engineering fundamentals, enhancing communication and mentorship skills</li>
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <p>If you'd like to collaborate or discuss engineering opportunities, feel free to reach out.</p>
-    <a href="mailto:your.email@domain.com" class="btn">Email Me</a>
+    <a href="mailto:zzli0403@uw.edu" class="btn">Email Me</a>
+    <p style="margin-top:0.5rem;">📍 Seattle, WA</p>
   </section>
 
   <footer>
     © 2025 Zhengzhao (Ken) Li — All Rights Reserved
   </footer>
+
+  <script>
+    // Fade-in animation using Intersection Observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
