@@ -5,23 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yanjan Internship — Zhengzhao (Ken) Li</title>
 <style>
-body{font-family:"Segoe UI",Arial,sans-serif;margin:0;background:#fafafa;color:#222;line-height:1.6;}
-header{background:#4b0082;color:#fff;text-align:center;padding:1.5rem;}
-section{max-width:850px;margin:2rem auto;background:#fff;padding:2rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-a{color:#4b0082;text-decoration:none;}
-footer{text-align:center;background:#4b0082;color:white;padding:1rem;margin-top:2rem;}
+body {
+  font-family:"Segoe UI",Arial,sans-serif;
+  margin:0;
+  background:#fafafa;
+  color:#222;
+  line-height:1.6;
+}
+header {
+  background:linear-gradient(135deg,#4b0082,#6a0dad);
+  color:#fff;
+  text-align:center;
+  padding:1.8rem;
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+section {
+  max-width:850px;
+  margin:2rem auto;
+  background:#fff;
+  padding:2rem;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.8s ease-out;
+}
+section.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+img {
+  width:100%;
+  border-radius:14px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  margin:1.5rem 0;
+  transition:transform 0.4s ease, box-shadow 0.4s ease;
+}
+img:hover {
+  transform:scale(1.03);
+  box-shadow:0 6px 14px rgba(0,0,0,0.25);
+}
+.caption {
+  font-style:italic;
+  color:#555;
+  margin-bottom:1.5rem;
+  text-align:center;
+}
+a {
+  color:#4b0082;
+  text-decoration:none;
+}
+footer {
+  text-align:center;
+  background:#4b0082;
+  color:white;
+  padding:1rem;
+  margin-top:2rem;
+  box-shadow:0 -2px 6px rgba(0,0,0,0.2);
+}
+@media(max-width:600px){
+  section{margin:1rem; padding:1.2rem;}
+}
 </style>
 </head>
 <body>
+
 <header>
   <h1>Yanjan USA LLC Engineer Internship</h1>
-  <p>June – September 2025 | New Hampshire, USA</p>
+  <p>June – September 2025 · New Hampshire, USA</p>
 </header>
+
 <section>
   <h2>Overview</h2>
   <p>
-    At Yanjan USA, I worked as a maintenance and process engineering intern, contributing to the reliability 
-    and optimization of high-speed manufacturing lines producing nonwoven materials.
+    At Yanjan USA, I worked as a maintenance and process engineering intern, contributing to the reliability
+    and optimization of high-speed manufacturing lines producing nonwoven materials. This role blended
+    mechanical repair, process analysis, and documentation to ensure consistent and safe operation.
   </p>
 
   <h2>Key Responsibilities</h2>
@@ -32,15 +91,43 @@ footer{text-align:center;background:#4b0082;color:white;padding:1rem;margin-top:
     <li>Audited spare-part inventory and assisted in standardizing documentation practices.</li>
   </ul>
 
+  <img src="images/YANJAN-1.jpg" alt="Motor repair and inspection under production line">
+  <p class="caption">Motor repair and inspection work under the production line — ensuring stability and performance of the motion system.</p>
+
+  <img src="images/YANJAN-2.jpg" alt="Motor naming convention chart at Yanjan">
+  <p class="caption">Motor naming convention chart I established to unify identification across production lines — improving communication and maintenance efficiency.</p>
+
   <h2>Skills Gained</h2>
   <ul>
-    <li>Hands-on familiarity with pneumatic systems, maintenance planning, and quality control.</li>
-    <li>Improved ability to document, communicate, and standardize industrial maintenance processes.</li>
-    <li>Enhanced understanding of manufacturing reliability and teamwork under operational pressure.</li>
+    <li>Hands-on familiarity with pneumatic systems, motor drive configurations, and quality control.</li>
+    <li>Improved ability to document, communicate, and standardize maintenance procedures.</li>
+    <li>Enhanced understanding of reliability engineering and system troubleshooting under time pressure.</li>
   </ul>
+
+  <img src="images/YANJAN-3.jpg" alt="PLC component maintenance at Yanjan">
+  <p class="caption">Inspecting PLC wiring and control components to ensure safe signal flow and reliable automation response.</p>
+
+  <p>
+    I also created an Excel-based maintenance guidebook summarizing troubleshooting patterns,
+    helping engineers standardize preventive maintenance and minimize unexpected line stoppages.
+  </p>
 
   <p><a href="index.html">← Back to Portfolio</a></p>
 </section>
+
 <footer>© 2025 Zhengzhao (Ken) Li</footer>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
+</script>
+
 </body>
 </html>
