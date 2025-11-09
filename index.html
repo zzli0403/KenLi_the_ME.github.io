@@ -125,6 +125,13 @@
     }
     .gallery img:hover { transform: scale(1.05); }
 
+    /* ✅ Fix: Show ME123 F1-1 at its natural scale */
+    .gallery img:first-child {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
     footer {
       text-align: center;
       padding: 1.5rem;
