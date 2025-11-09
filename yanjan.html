@@ -45,6 +45,13 @@ img:hover {
   transform:scale(1.03);
   box-shadow:0 6px 14px rgba(0,0,0,0.25);
 }
+/* Smaller images */
+.medium-img {
+  width:85%;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
 .caption {
   font-style:italic;
   color:#555;
@@ -65,6 +72,7 @@ footer {
 }
 @media(max-width:600px){
   section{margin:1rem; padding:1.2rem;}
+  .medium-img{width:95%;}
 }
 </style>
 </head>
@@ -72,7 +80,7 @@ footer {
 
 <header>
   <h1>Yanjan USA LLC Engineer Internship</h1>
-  <p>June – September 2025 · New Hampshire, USA</p>
+  <p>June – September 2025 · Statesville, NC, USA</p>
 </header>
 
 <section>
@@ -91,7 +99,7 @@ footer {
     <li>Audited spare-part inventory and assisted in standardizing documentation practices.</li>
   </ul>
 
-  <img src="images/YANJAN-1.jpg" alt="Motor repair and inspection under production line">
+  <img src="images/YANJAN-1.jpg" class="medium-img" alt="Motor repair and inspection under production line">
   <p class="caption">Motor repair and inspection work under the production line — ensuring stability and performance of the motion system.</p>
 
   <img src="images/YANJAN-2.jpg" alt="Motor naming convention chart at Yanjan">
@@ -104,7 +112,7 @@ footer {
     <li>Enhanced understanding of reliability engineering and system troubleshooting under time pressure.</li>
   </ul>
 
-  <img src="images/YANJAN-3.jpg" alt="PLC component maintenance at Yanjan">
+  <img src="images/YANJAN-3.jpg" class="medium-img" alt="PLC component maintenance at Yanjan">
   <p class="caption">Inspecting PLC wiring and control components to ensure safe signal flow and reliable automation response.</p>
 
   <p>
