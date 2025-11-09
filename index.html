@@ -112,7 +112,6 @@
       margin-top: 1rem;
     }
     .gallery img {
-      width: 280px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       transition: transform 0.4s ease, opacity 0.6s ease;
@@ -125,11 +124,20 @@
     }
     .gallery img:hover { transform: scale(1.05); }
 
-    /* ✅ Fix: Show ME123 F1-1 at its natural scale */
-    .gallery img:first-child {
-      width: auto;
-      max-width: 100%;
+    /* ✅ Adjusted gallery sizes */
+    .gallery img:nth-child(1) {
+      width: 260px; /* ME123 F1-1 smaller */
       height: auto;
+    }
+    .gallery img:nth-child(2) {
+      width: 280px;
+      height: auto;
+    }
+    .gallery img:nth-child(3) {
+      width: auto;
+      max-width: 280px;
+      height: auto; /* fixed deformation for F1-2 */
+      object-fit: contain;
     }
 
     footer {
@@ -155,6 +163,9 @@
     @media(max-width:600px){
       section{margin:1rem; padding:1.2rem;}
       .about-flex{flex-direction: column; align-items: center;}
+      .gallery img:nth-child(1),
+      .gallery img:nth-child(2),
+      .gallery img:nth-child(3){max-width: 90%;}
     }
   </style>
 </head>
@@ -175,7 +186,6 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-flex">
       <img src="images/SELFIE.jpg" alt="Zhengzhao Li portrait">
@@ -198,7 +208,6 @@
     </div>
   </section>
 
-  <!-- JOURNEY -->
   <section id="journey">
     <h2>Engineering Journey</h2>
 
@@ -233,7 +242,6 @@
     </ul>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
     <h2>Featured Projects</h2>
 
@@ -269,7 +277,6 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <h2>Technical Skills</h2>
     <ul>
@@ -282,7 +289,6 @@
     </ul>
   </section>
 
-  <!-- AWARDS -->
   <section id="awards">
     <h2>Awards & Additional Experience</h2>
     <ul>
@@ -294,7 +300,6 @@
     </ul>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <h2>Contact</h2>
     <p>If you'd like to collaborate or discuss engineering opportunities, feel free to reach out.</p>
@@ -307,7 +312,6 @@
   </footer>
   
   <script>
-    // Fade-in sections
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -318,7 +322,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-    // Fade-in gallery images
     const imgObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
