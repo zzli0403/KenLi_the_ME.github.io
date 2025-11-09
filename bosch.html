@@ -5,41 +5,120 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bosch Internship — Zhengzhao (Ken) Li</title>
 <style>
-body{font-family:"Segoe UI",Arial,sans-serif;margin:0;background:#fafafa;color:#222;line-height:1.6;}
-header{background:#4b0082;color:#fff;text-align:center;padding:1.5rem;}
-section{max-width:850px;margin:2rem auto;background:#fff;padding:2rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-a{color:#4b0082;text-decoration:none;}
-footer{text-align:center;background:#4b0082;color:white;padding:1rem;margin-top:2rem;}
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  color: #222;
+  line-height: 1.6;
+}
+header {
+  background: linear-gradient(135deg, #4b0082, #6a0dad);
+  color: #fff;
+  text-align: center;
+  padding: 1.8rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+header img {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  margin-top: 1rem;
+}
+section {
+  max-width: 850px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin: 1.5rem 0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+a {
+  color: #4b0082;
+  text-decoration: none;
+}
+footer {
+  text-align: center;
+  background: #4b0082;
+  color: white;
+  padding: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+}
+@media (max-width:600px) {
+  section { margin: 1rem; padding: 1.2rem; }
+  header img { width: 160px; }
+}
 </style>
 </head>
 <body>
+
 <header>
   <h1>Bosch XC-CT EHW Technician Internship</h1>
-  <p>July – August 2023 | Suzhou, China</p>
+  <p>July – August 2023 · Suzhou, China</p>
+  <img src="images/BOSCH-2.jpg" alt="Bosch internship certificate and ID badge">
 </header>
+
 <section>
   <h2>Overview</h2>
   <p>
-    During my internship at Bosch, I supported the XC-CT EHW team by performing diagnostic and technical tasks 
-    that emphasized precision, documentation, and communication between engineering departments.
+    During my internship at Bosch, I supported the XC-CT EHW team by performing diagnostic and technical
+    tasks that emphasized precision, documentation, and collaboration between engineering departments.
+    This position exposed me to the process of verifying automotive electronic modules and working within
+    Bosch’s rigorous quality system.
   </p>
 
   <h2>Key Responsibilities</h2>
   <ul>
-    <li>Reworked and debugged printed circuit boards (PCBs) through hands-on testing, soldering, and wiring.</li>
-    <li>Translated and standardized technical documentation for cross-functional use.</li>
-    <li>Assisted engineers in fault detection and verification of electrical subassemblies.</li>
+    <li>Reworked and debugged printed circuit boards (PCBs) through soldering, wiring, and functional testing.</li>
+    <li>Used an <strong>oscilloscope</strong> to analyze voltage signals, confirm component behavior, and assist engineers in fault tracing.</li>
+    <li>Translated and standardized technical documentation for bilingual teams across departments.</li>
+    <li>Supported diagnostics and final verification of electrical subassemblies for automotive control units.</li>
   </ul>
+
+  <img src="images/BOSCH-1.jpg" alt="Soldering and debugging setup at Bosch">
 
   <h2>Skills Gained</h2>
   <ul>
-    <li>Improved cross-disciplinary communication between mechanical and electrical teams.</li>
-    <li>Developed strong documentation and testing discipline for quality assurance.</li>
-    <li>Enhanced understanding of how precision manufacturing integrates with embedded systems.</li>
+    <li>Hands-on experience using oscilloscopes, multimeters, and soldering tools for precision diagnostics.</li>
+    <li>Enhanced cross-disciplinary communication between mechanical and electrical engineers.</li>
+    <li>Learned structured problem-solving, documentation discipline, and attention to quality assurance in production environments.</li>
   </ul>
 
   <p><a href="index.html">← Back to Portfolio</a></p>
 </section>
+
 <footer>© 2025 Zhengzhao (Ken) Li</footer>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
+</script>
+
 </body>
 </html>
